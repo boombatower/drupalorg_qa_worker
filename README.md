@@ -55,3 +55,28 @@ $conf['worker_login'] = array(
 $conf['worker_category'] = '[CATEGORY]';
 $conf['worker_concurrency'] = WORKER_CONCURRENCY;
 ```
+
+The worker needs a consistent way to refer to the "embedded" Drupal installation that runs SimpleTest. To accomplish this, we decided to:
+
+  - set the JOB_URL constant to "worker.loc" in job.inc
+  - add an entry for "worker.loc" in /etc/hosts
+  - create a virtual host entry for "worker.loc" as follows
+
+In this case `/srv/www/htdocs/` points to the Drupal root of the worker so `/srv/www/htdocs/sites/default/files/job` points to the directory in which the embedded Drupal will be located.
+
+    <VirtualHost *>
+      ServerName worker.loc
+      ServerAlias *.worker.loc
+      ServerAdmin root@site.loc
+
+      ErrorLog /dev/null
+      CustomLog /dev/null combined
+
+      DocumentRoot /srv/www/htdocs/sites/default/files/job
+      <Directory /srv/www/htdocs/sites/default/files/job>
+        AllowOverride FileInfo AuthConfig Limit Indexes Options=All,MultiViews
+        Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+        Order allow,deny
+        Allow from all
+      </Directory>
+    </VirtualHost>
