@@ -11,5 +11,5 @@ projects[drupal][version] = 7.12
 
 projects[worker][type] = module
 projects[worker][download][type] = git
-projects[worker][download][url] = git@github.com:boombatower/worker.git
+projects[worker][download][url] = git://github.com/boombatower/worker.git
 projects[worker][download][branch] = 7.x-1.x
