@@ -28,9 +28,9 @@ If the worker type requires a separate database to be configured add something l
 // created every job run using the stub database as a connection.
 $databases['drupal_mysql'] = array(
   'default' => array(
-    'database' => 'WORKER_DATABASE',
-    'username' => 'WORKER_DATABASE_USER',
-    'password' => 'WORKER_DATABASE_PASS',
+    'database' => '',
+    'username' => '',
+    'password' => '',
     'host' => 'localhost',
     'port' => '',
     'driver' => 'mysql',
@@ -52,8 +52,8 @@ $conf['worker_login'] = array(
   'username' => 'worker',
   'password' => 'worker',
 );
-$conf['worker_category'] = '[CATEGORY]';
-$conf['worker_concurrency'] = WORKER_CONCURRENCY;
+$conf['worker_category'] = 'conduit';
+$conf['worker_concurrency'] = 4;
 ```
 
 The worker needs a consistent way to refer to the "embedded" Drupal installation that runs SimpleTest. To accomplish this, we decided to:
