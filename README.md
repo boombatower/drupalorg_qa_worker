@@ -40,7 +40,7 @@ $databases['drupal_mysql'] = array(
 // Stub database used to make a connection using the appropriate driver. This
 // database must be created manually and will not be created or destroyed.
 $databases['drupal_mysql_stub'] = $databases['drupal_mysql'];
-$databases['drupal_mysql_stub']['default']['database'] = 'WORKER_DATABASE_STUB';
+$databases['drupal_mysql_stub']['default']['database'] .= '_stub';
 ```
 
 All workers will need the following settings added to `settings.php`. The category is `conduit` for `worker.make` and `worker_[CATEGORY].make` for any other. The concurrency is the maximum number of process to create at any given time, which should be based off the hardware being used by the worker.
